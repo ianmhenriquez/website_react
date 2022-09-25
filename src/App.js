@@ -12,7 +12,7 @@ class App extends Component {
   render() {
     Axios({
       method: "GET",
-      url: "http://localhost:3010/testAPI",
+      url: "https://lazy-cyan-basket-clam-veil.cyclic.app/testAPI",
       headers: {
         "Content-Type": "application/json"
       }
