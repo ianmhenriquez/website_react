@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter, Route, NavLink } from "react-router-dom";
 
-function Navbar() {
+const Navbar = () => {
     return (
         <div>
             <nav>

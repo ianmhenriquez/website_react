@@ -5,11 +5,11 @@ import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route, Router } from 'react-router-dom';
 
-import Home from './components/sub/home';
-import Test from './components/sub/testRoute';
-import NoPage from './components/sub/NoPage';
-import Navbar from './components/sub/NavBar';
-import Footer from './components/sub/footer';
+import Home from './components/layout/home';
+import Downloads from './components/layout/downloads';
+import NoPage from './components/layout/NoPage';
+import Header from './components/layout/header';
+import Footer from './components/layout/footer';
 
 
 
@@ -17,10 +17,10 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
     <BrowserRouter>
-      <Navbar />
+      <Header />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="/testAPI" element={<Test />} />
+        <Route path="/testAPI" element={<Downloads />} />
         <Route path="*" element={<NoPage />} />
       </Routes>
       <Footer />
