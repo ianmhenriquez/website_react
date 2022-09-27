@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import logo from '../../logo.svg';
 import axios from "axios";
 
 const Downloads = () => {

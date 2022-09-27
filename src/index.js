@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import { BrowserRouter } from 'react-router-dom';
-import { Routes, Route, Router } from 'react-router-dom';
+import { Routes, Route} from 'react-router-dom';
 
 import Home from './components/layout/home';
 import Downloads from './components/layout/downloads';
