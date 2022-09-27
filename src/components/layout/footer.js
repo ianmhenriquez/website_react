@@ -1,16 +1,20 @@
 import React from "react";
+import {Container} from '../base/core';
+import styled from 'styled-components';
+
+const StyledFooter = styled(Container).attrs({
+  as: "footer"
+})`
+    background-color:${props => props.theme.colors.defaultTertiary};
+`;
 
 const Footer  = () => {
   return (
-    <div className="footer">
-      <footer>
-        <div>
-          <p>
-            Copyright &copy; Your Website 2020
-          </p>
-        </div>
-      </footer>
-    </div>
+    <StyledFooter>
+      <p>
+        footer placeholder
+      </p>
+    </StyledFooter>
   );
 }
 
