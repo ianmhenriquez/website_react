@@ -12,7 +12,7 @@ const Footer  = () => {
   return (
     <StyledFooter>
       <p>
-        footer placeholder
+        footer place
       </p>
     </StyledFooter>
   );
