@@ -67,17 +67,16 @@ const StyledNavLink = styled(NavLink)`
 
 const Navbar = () => {
     const [isOpened, setIsOpened] = useState(false);
+    const RightMenu = useSpring({
+        transform: isOpened ? 'translateX(0)' : 'translateX(100%)',
+        transform: isOpened ? 'translateY(0' : 'translateY(100%)',
+        opacity: isOpened ? 1 : 0
+    });
     const {
         size,
-        visible,
         ...springProps
     } = useSpring({
         size: isOpened ? 400 : 0,
-        visible: isOpened ? 'block' : 'none',
-        from: {
-            size: 0,
-            visible: 'none'
-        }
     });
 
     return (
@@ -89,20 +88,22 @@ const Navbar = () => {
                     </NavLink>
                 </LinkItem>
                 <LinkItemBurger>
-                    <StyledNavLink className={({isActive}) => (isActive ? "active" : "inactive")}  to="/projects">Projects</StyledNavLink>
-                    <StyledNavLink className={({isActive}) => (isActive ? 'active' : 'inactive')}  to="/downloads">Downloads</StyledNavLink>
-                    <StyledNavLink className={({isActive}) => (isActive ? 'active' : 'inactive')}  to="/contact">Contact</StyledNavLink>
+                    <StyledNavLink className={({ isActive }) => (isActive ? "active" : "inactive")} to="/projects">Projects</StyledNavLink>
+                    <StyledNavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/downloads">Downloads</StyledNavLink>
+                    <StyledNavLink className={({ isActive }) => (isActive ? 'active' : 'inactive')} to="/contact">Contact</StyledNavLink>
                 </LinkItemBurger>
                 <div onClick={() => setIsOpened(e => !e)}>
                     <HamburgerIcon />
                 </div>
-                <AnimatedIcon style={{ height: size, width: size, display: visible, ...springProps }} >
-                    <Item >
-                        <StyledNavLink className={({isActive}) => (isActive ? "active" : "inactive")} to="/projects">Projects</StyledNavLink>
-                        <StyledNavLink className={({isActive}) => (isActive ? "active" : "inactive")} to="/downloads">Downloads</StyledNavLink>
-                        <StyledNavLink className={({isActive}) => (isActive ? "active" : "inactive")} to="/contact">Contact</StyledNavLink>
-                    </Item>
-                </AnimatedIcon>
+                <animated.div style={RightMenu}>
+                    <AnimatedIcon style={{ height: size, width: size, ...springProps }} >
+                        <Item >
+                            <StyledNavLink className={({ isActive }) => (isActive ? "active" : "inactive")} to="/projects">Projects</StyledNavLink>
+                            <StyledNavLink className={({ isActive }) => (isActive ? "active" : "inactive")} to="/downloads">Downloads</StyledNavLink>
+                            <StyledNavLink className={({ isActive }) => (isActive ? "active" : "inactive")} to="/contact">Contact</StyledNavLink>
+                        </Item>
+                    </AnimatedIcon>
+                </animated.div>
             </StyledRow>
         </StyledNav>
     );
