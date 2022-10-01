@@ -1,10 +1,12 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import styled from 'styled-components'
 import { Container, Row } from "../base";
 import { NavLink } from "react-router-dom";
 import { device } from "../base/devices";
 import HamburgerIcon from "../icons/hamburger";
+import LogoIcon from "../icons/logo";
 import { useSpring, animated } from "react-spring";
+
 
 const StyledNav = styled(Container).attrs({
     as: "nav"
@@ -30,8 +32,6 @@ const LinkItem = styled.div`
     display:flex;
     width:75%;
     justify-content:space-between;
-
-
 `;
 
 
@@ -55,6 +55,15 @@ const Item = styled(Container)`
     justify-content:space-evenly;
 `;
 
+const StyledNavLink = styled(NavLink)`
+    text-decoration:none;
+    color:white;
+    &.active {
+        color:black;
+    }
+
+`;
+
 
 const Navbar = () => {
     const [isOpened, setIsOpened] = useState(false);
@@ -75,21 +84,23 @@ const Navbar = () => {
         <StyledNav>
             <StyledRow justifyContent="end">
                 <LinkItem>
-                    <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">Temp home</NavLink>
+                    <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
+                        <LogoIcon iconColor="defaultSecondary" />
+                    </NavLink>
                 </LinkItem>
-                <LinkItemBurger width="25%">
-                    <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/projects">Projects</NavLink>
-                    <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/downloads">Downloads</NavLink>
-                    <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/contact">Contact</NavLink>
+                <LinkItemBurger>
+                    <StyledNavLink className={({isActive}) => (isActive ? "active" : "inactive")}  to="/projects">Projects</StyledNavLink>
+                    <StyledNavLink className={({isActive}) => (isActive ? 'active' : 'inactive')}  to="/downloads">Downloads</StyledNavLink>
+                    <StyledNavLink className={({isActive}) => (isActive ? 'active' : 'inactive')}  to="/contact">Contact</StyledNavLink>
                 </LinkItemBurger>
                 <div onClick={() => setIsOpened(e => !e)}>
                     <HamburgerIcon />
                 </div>
                 <AnimatedIcon style={{ height: size, width: size, display: visible, ...springProps }} >
                     <Item >
-                        <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/projects">Projects</NavLink>
-                        <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/downloads">Downloads</NavLink>
-                        <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/contact">Contact</NavLink>
+                        <StyledNavLink className={({isActive}) => (isActive ? "active" : "inactive")} to="/projects">Projects</StyledNavLink>
+                        <StyledNavLink className={({isActive}) => (isActive ? "active" : "inactive")} to="/downloads">Downloads</StyledNavLink>
+                        <StyledNavLink className={({isActive}) => (isActive ? "active" : "inactive")} to="/contact">Contact</StyledNavLink>
                     </Item>
                 </AnimatedIcon>
             </StyledRow>
