@@ -7,7 +7,6 @@ import HamburgerIcon from "../icons/hamburger";
 import LogoIcon from "../icons/logo";
 import { useSpring, animated } from "react-spring";
 
-
 const StyledNav = styled(Container).attrs({
     as: "nav"
 })`
@@ -68,7 +67,6 @@ const StyledNavLink = styled(NavLink)`
 const Navbar = () => {
     const [isOpened, setIsOpened] = useState(false);
     const RightMenu = useSpring({
-        transform: isOpened ? 'translateX(0)' : 'translateX(100%)',
         transform: isOpened ? 'translateY(0' : 'translateY(100%)',
         opacity: isOpened ? 1 : 0
     });
