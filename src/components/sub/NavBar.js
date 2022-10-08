@@ -12,9 +12,21 @@ const StyledNav = styled(Container).attrs({
 })`
    width:100%;
    justify-Content:${props => props.theme.justifyContent.center};
-   padding-top:${props => props.theme.spacing.doubleInset};
-   padding-bottom:${props => props.theme.spacing.doubleInset};
+   flex-direction:column;
+   align-items:center;
+   @media ${device.laptopL}{
+    padding-bottom:${props => props.theme.spacing.inset};
+    padding-top:${props => props.theme.spacing.inset};
+   }
+   @media ${device.mobileL}{
+    padding-bottom:0;
+    padding-top:0;
+   }
+
 `
+
+const AnimatedNav = styled(animated(StyledNav))`
+`;
 
 const LinkItemBurger = styled.div`
     display:flex;
@@ -74,12 +86,20 @@ const Navbar = () => {
     const [isOpened, setIsOpened] = useState(false);
     const openMenu = useSpringRef();
     const navMenu = useSpringRef();
+    const entireNav = useSpringRef();
 
     const RightMenu = useSpring({
         ref: openMenu,
         springConfig: config.default,
         from: { width: '0%', height: '0%' },
         to: { width: isOpened ? '100%' : '0%', height: isOpened ? '100%' : '0%' },
+    });
+
+    const wholeMenu = useSpring({
+        ref: entireNav,
+        springConfig: config.default,
+        from: { height: '10vh'},
+        to: {height: isOpened ? '25vh' : '10vh'}
     });
 
     const listTransition = useTransition(isOpened ? navItems : [],
@@ -97,10 +117,10 @@ const Navbar = () => {
             {navItems.name}</StyledNavLink>
     });
 
-    useChain(isOpened ? [openMenu, navMenu] : [navMenu, openMenu], [0, isOpened ? 0.5 : 0.6]);
+    useChain(isOpened ? [entireNav, openMenu, navMenu] : [navMenu, openMenu, entireNav], [0, isOpened ? 0.5 : 0.6]);
 
     return (
-        <StyledNav>
+        <AnimatedNav style={wholeMenu}>
             <StyledRow justifyContent="end">
                 <LinkItem>
                     <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
@@ -115,13 +135,13 @@ const Navbar = () => {
                 <div onClick={() => setIsOpened(e => !e)}>
                     <HamburgerIcon />
                 </div>
-                <AnimatedIcon style={RightMenu} >
-                    <Item >
-                        {fragment}
-                    </Item>
-                </AnimatedIcon>
             </StyledRow>
-        </StyledNav>
+            <AnimatedIcon style={RightMenu} >
+                <Item >
+                    {fragment}
+                </Item>
+            </AnimatedIcon>
+        </AnimatedNav>
     );
 }
 
