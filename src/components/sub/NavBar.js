@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { device } from "../base/devices";
 import HamburgerIcon from "../icons/hamburger";
 import LogoIcon from "../icons/logo";
-import { useSpring, animated } from "react-spring";
+import { useSpring, animated, useChain, useTransition, useSpringRef, SpringConfig, config } from "react-spring";
 
 const StyledNav = styled(Container).attrs({
     as: "nav"
@@ -42,10 +42,10 @@ const StyledRow = styled(Row)`
     }
 `;
 
-const iconContainer = styled.div`
+
+const AnimatedIcon = styled(animated.div)`
+    background-color:pink;
 `
-const AnimatedIcon = styled(animated(iconContainer))`
-`;
 
 const Item = styled(Container)`
     flex-direction:column;
@@ -54,7 +54,7 @@ const Item = styled(Container)`
     justify-content:space-evenly;
 `;
 
-const StyledNavLink = styled(NavLink)`
+const StyledNavLink = styled(animated(NavLink))`
     text-decoration:none;
     color:white;
     &.active {
@@ -63,19 +63,41 @@ const StyledNavLink = styled(NavLink)`
 
 `;
 
+const navItems = [
+    { name: 'Projects', link: '/projects' },
+    { name: 'Downloads', link: '/downloads' },
+    { name: 'Contact', link: '/contact' }
+]
+
 
 const Navbar = () => {
     const [isOpened, setIsOpened] = useState(false);
+    const openMenu = useSpringRef();
+    const navMenu = useSpringRef();
+
     const RightMenu = useSpring({
-        transform: isOpened ? 'translateY(0' : 'translateY(100%)',
-        opacity: isOpened ? 1 : 0
+        ref: openMenu,
+        springConfig: config.default,
+        from: { width: '0%', height: '0%' },
+        to: { width: isOpened ? '100%' : '0%', height: isOpened ? '100%' : '0%' },
     });
-    const {
-        size,
-        ...springProps
-    } = useSpring({
-        size: isOpened ? 400 : 0,
+
+    const listTransition = useTransition(isOpened ? navItems : [],
+        {
+            ref: navMenu,
+            trail: 400 / navItems.length,
+            from: { opacity: 0, transform: 'translateY(20px)' },
+            enter: { opacity: 1, transform: 'translateY(0)' },
+            leave: { opacity: 0, transform: 'translateY(20px)' }
+        }
+    )
+
+    const fragment = listTransition((style, navItems) => {
+        return <StyledNavLink style={style} className={({ isActive }) => (isActive ? "active" : "inactive")} to={navItems.link}>
+            {navItems.name}</StyledNavLink>
     });
+
+    useChain(isOpened ? [openMenu, navMenu] : [navMenu, openMenu], [0, isOpened ? 0.5 : 0.6]);
 
     return (
         <StyledNav>
@@ -93,15 +115,11 @@ const Navbar = () => {
                 <div onClick={() => setIsOpened(e => !e)}>
                     <HamburgerIcon />
                 </div>
-                <animated.div style={RightMenu}>
-                    <AnimatedIcon style={{ height: size, width: size, ...springProps }} >
-                        <Item >
-                            <StyledNavLink className={({ isActive }) => (isActive ? "active" : "inactive")} to="/projects">Projects</StyledNavLink>
-                            <StyledNavLink className={({ isActive }) => (isActive ? "active" : "inactive")} to="/downloads">Downloads</StyledNavLink>
-                            <StyledNavLink className={({ isActive }) => (isActive ? "active" : "inactive")} to="/contact">Contact</StyledNavLink>
-                        </Item>
-                    </AnimatedIcon>
-                </animated.div>
+                <AnimatedIcon style={RightMenu} >
+                    <Item >
+                        {fragment}
+                    </Item>
+                </AnimatedIcon>
             </StyledRow>
         </StyledNav>
     );
