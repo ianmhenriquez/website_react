@@ -4,7 +4,7 @@ import axios from "axios";
 
 const Downloads = () => {
     const [api, setAPI] = useState("");
-    const url = "https://cute-teal-monkey-tie.cyclic.app/testAPI"
+    const url = "https://cute-pear-cobra-boot.cyclic.app/testAPI";
 
     useEffect(() => {
         getAPI();

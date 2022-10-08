@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 import { device } from "../base/devices";
 import HamburgerIcon from "../icons/hamburger";
 import LogoIcon from "../icons/logo";
-import { useSpring, animated, useChain, useTransition, useSpringRef, SpringConfig, config } from "react-spring";
+import { useSpring, animated, useChain, useTransition, useSpringRef, config } from "react-spring";
 
 const StyledNav = styled(Container).attrs({
     as: "nav"
