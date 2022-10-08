@@ -7,6 +7,7 @@ const StyledHeader = styled(Container).attrs({
     as: "header"
 })`
     background-color:${props => props.theme.colors.secondary};
+    width:100%;
 `
 
 const Header = () => {

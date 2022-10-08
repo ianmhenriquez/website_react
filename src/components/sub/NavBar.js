@@ -26,6 +26,18 @@ const StyledNav = styled(Container).attrs({
 `
 
 const AnimatedNav = styled(animated(StyledNav))`
+   width:100%;
+   justify-Content:${props => props.theme.justifyContent.center};
+   flex-direction:column;
+   align-items:center;
+   @media ${device.laptopL}{
+    padding-bottom:${props => props.theme.spacing.inset};
+    padding-top:${props => props.theme.spacing.inset};
+   }
+   @media ${device.mobileL}{
+    padding-bottom:0;
+    padding-top:0;
+   }
 `;
 
 const LinkItemBurger = styled.div`
@@ -120,7 +132,7 @@ const Navbar = () => {
     useChain(isOpened ? [entireNav, openMenu, navMenu] : [navMenu, openMenu, entireNav], [0, isOpened ? 0.5 : 0.6]);
 
     return (
-        <AnimatedNav style={wholeMenu}>
+        <AnimatedNav  style={wholeMenu}>
             <StyledRow justifyContent="end">
                 <LinkItem>
                     <NavLink style={{ textDecoration: 'none', color: 'white' }} to="/">
