@@ -6,6 +6,7 @@ import { useSpring, animated, useChain, useTransition, useSpringRef, config } fr
 
 const AnimatedTile = styled(animated(Container))`
     background-color:pink;
+    width:100%;
 `;
 
 const StyledRow = styled(Row)`
@@ -15,6 +16,14 @@ const StyledRow = styled(Row)`
         align-items:center;
     }
 `;
+
+const Card = styled(animated(Container))`
+    width:45%;
+    align-items:center;
+    @media ${device.mobileL}{
+        width:75%;
+    }
+`
 
 const AnimatedH1 = styled(animated.h1)`
 `;
@@ -34,7 +43,7 @@ const Home = () => {
     return (
         <Container justifyContent="center">
             <StyledRow>
-                <Container direction="column">
+                <Card direction="column" width="45%">
                     <AnimatedH1 style={fromLeft}>
                         Title placeHolder
                     </AnimatedH1>
@@ -50,8 +59,8 @@ const Home = () => {
                             </Column>
                         </Row>
                     </AnimatedTile>
-                </Container>
-                <Container direction="column">
+                </Card>
+                <Card direction="column">
                     <AnimatedH1 style={fromRight}>
                         Title placeHolder
                     </AnimatedH1>
@@ -67,7 +76,7 @@ const Home = () => {
                             </Column>
                         </Row>
                     </AnimatedTile>
-                </Container>
+                </Card>
             </StyledRow>
         </Container>
     );
