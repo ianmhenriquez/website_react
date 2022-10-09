@@ -18,7 +18,7 @@ const StyledRow = styled(Row)`
 `;
 
 const Card = styled(animated(Container))`
-    width:45%;
+    width:30%;
     align-items:center;
     @media ${device.mobileL}{
         width:75%;
@@ -43,6 +43,23 @@ const Home = () => {
     return (
         <Container justifyContent="center">
             <StyledRow>
+                <Card direction="column">
+                    <AnimatedH1 style={fromLeft}>
+                        Title placeHolder
+                    </AnimatedH1>
+                    <AnimatedTile style={fromLeft}>
+                        <Row direction="direction">
+                            <Column>
+                                <p>picture placeholder</p>
+                            </Column>
+                            <Column>
+                                <p>
+                                    text
+                                </p>
+                            </Column>
+                        </Row>
+                    </AnimatedTile>
+                </Card>
                 <Card direction="column" width="45%">
                     <AnimatedH1 style={fromLeft}>
                         Title placeHolder
