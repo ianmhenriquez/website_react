@@ -6,7 +6,7 @@ import Navbar from '../sub/NavBar';
 const StyledHeader = styled(Container).attrs({
     as: "header"
 })`
-    background-color:${props => props.theme.colors.secondary};
+    background-color:${props => props.theme.colors.defaultTertiary};
     width:100%;
 `
 

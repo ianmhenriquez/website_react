@@ -8,14 +8,20 @@ const Container = styled.div`
     height: 40px;
     min-height: 40px;
     max-height: 40px;
-    color: grey;
-    user-select: none;
 `;
 
 const SVG = styled.svg`
     width: 100%;
     height: 100%;
     color:${props => props.theme.colors[props.fontColor]};
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        color: ${({ theme }) => theme.colors.defaultPrimary};
+    }
+    //if root is the active link, change the color to the tertiary color
+    &.active {
+        color: ${({ theme }) => theme.colors.tertiary};
+    }
 `;
 
 

@@ -10,12 +10,7 @@ const StyledContainer = styled(Container)`
     height: 40px;
     min-height: 40px;
     max-height: 40px;
-    color: ${({ isOpen }) => isOpen ? '#2589bd' : 'grey'};
     user-select: none;
-
-    @media ${device.laptopL} {
-        display:none;
-    }
 
     @media ${device.mobileL}{
         display:block;
@@ -27,6 +22,14 @@ const SVG = styled.svg`
     width: 100%;
     height: 100%;
     color:${props => props.theme.colors[props.iconColor]};
+    transition: all 0.3s ease-in-out;
+    &:hover{
+        color:${props => props.theme.colors.defaultPrimary};
+    }
+
+
+    
+
 `;
 
 const HamburgerIcon = ({ className, id, isOpen, iconColor="defaultSecondary" }) => (

@@ -8,9 +8,10 @@ const Theme = ({ children }) => {
             defaultSecondary: "#FFFFFF", // white
             defaultTertiary: "#999999", // lightgrey
             primary: "#F1ECE9", // beige
-            secondary: "#CF9685", // light peach
-            tertiary: "#9F543D", // dark peach
+            secondary: "#CF9685", // light peach 
+            tertiary: "#CFB53B", // yellow
             quaternary: "#030200", // blackish
+
         },
         fonts: {
             paragraphFont: "Unna",
